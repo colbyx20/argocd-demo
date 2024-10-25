@@ -1,4 +1,5 @@
 apiVersion: argoproj.io/v1alpha1
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: guestbook
@@ -11,7 +12,7 @@ spec:
   source:
     path: guestbook
     repoURL: "https://github.com/colbyx20/argocd-demo.git"
-    targerRevision: master
+    targetRevision: master
   syncPolicy:
     syncOptions:
       - createNamespace=true
