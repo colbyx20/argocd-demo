@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: guestbook
-    repoURL: 
+    repoURL: "https://github.com/colbyx20/argocd-demo.git"
     targerRevision: master
   syncPolicy:
     syncOptions:
