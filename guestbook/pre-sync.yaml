@@ -42,4 +42,4 @@ spec:
 
             # Call the function to restart and re-establish port-forward
             restart_and_forward
-        restartPolicy: OnFailure
+      restartPolicy: OnFailure
