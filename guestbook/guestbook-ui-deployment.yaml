@@ -18,3 +18,64 @@ spec:
         name: guestbook-ui
         ports:
         - containerPort: 80
+        volumeMounts:
+          - name: index-config
+            mountPath: "/var/www/html/index.html"
+            subPath: "index.html"
+      volumes:
+        - name: index-config
+          configMap:
+            name: index-config
+
+---
+
+apiVersion: v1
+data:
+  index.html: |-
+    <html ng-app="redis">
+      <head>
+        <title>Guestbook</title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+        <script src="controllers.js"></script>
+        <script src="fancy.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.js"></script>
+      </head>
+      <body ng-controller="RedisCtrl">
+        <div style="margin-left:20px;">
+          <div class="row" style="width: 50%;">
+            <div class="col-sm-6">
+              <h2 fancy>Fancy Guestbook2.0</h2>
+            </div>
+            <fieldset class="col-sm-6" style="margin-top:15px">
+              <div class="col-sm-8">
+                <input ng-model="query" placeholder="Query here" class="form-control" type="text" name="input"><br>
+              </div>
+              <div class="col-sm-4">
+                <button type="button" class="btn btn-primary" ng-click="controller.onSearch()">Search</button>
+              </div>
+            </fieldset>
+          </div>
+          <div ng-show="showMain" class="main-ui col-sm-6">
+            <form>
+            <fieldset>
+            <input ng-model="msg" placeholder="Messages" class="form-control" type="text" name="input"><br>
+            <button type="button" class="btn btn-primary" ng-click="controller.onRedis()">Submit</button>
+            </fieldset>
+            </form>
+            <div>
+              <div ng-repeat="msg in messages track by $index">
+                {{msg}}
+              </div>
+            </div>
+          </div>
+          <div ng-hide="showMain" class="search-results row">
+            HEHEHEHEHE
+          </div>
+        </div>
+      </body>
+    </html>
+kind: ConfigMap
+metadata:
+  name: index-config
+  namespace: guestbook
