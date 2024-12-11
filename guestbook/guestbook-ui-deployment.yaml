@@ -70,7 +70,7 @@ data:
             </div>
           </div>
           <div ng-hide="showMain" class="search-results row">
-            HEHEHEHEHE
+            Hello
           </div>
         </div>
       </body>
