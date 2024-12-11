@@ -22,10 +22,16 @@ spec:
           - name: index-config
             mountPath: "/var/www/html/index.html"
             subPath: "index.html"
+          - name: task-pv-storage
+            mountPath: /storage
       volumes:
         - name: index-config
           configMap:
             name: index-config
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim
+
 
 ---
 
