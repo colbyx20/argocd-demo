@@ -16,6 +16,7 @@ spec:
       containers:
       - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
         name: guestbook-ui
+        command: ['sh', '-c', 'while true; do echo "logging" >> /storage/logging.txt; sleep 1; done']
         ports:
         - containerPort: 80
         volumeMounts:
