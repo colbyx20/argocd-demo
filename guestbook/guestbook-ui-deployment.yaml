@@ -14,17 +14,17 @@ spec:
         app: guestbook-ui
     spec:
       containers:
-      - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
-        name: guestbook-ui
-        command: ['sh', '-c', 'while true; do echo "logging" >> /storage/logging.txt && echo "logging"; sleep 1; done']
-        ports:
-        - containerPort: 80
-        volumeMounts:
-          - name: index-config
-            mountPath: "/var/www/html/index.html"
-            subPath: "index.html"
-          - name: task-pv-storage
-            mountPath: /storage
+        - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
+          name: guestbook-ui
+          command: ["sh", "-c", 'while true; do echo "logging"; sleep 1; done']
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: index-config
+              mountPath: "/var/www/html/index.html"
+              subPath: "index.html"
+            - name: task-pv-storage
+              mountPath: /storage
       volumes:
         - name: index-config
           configMap:
@@ -33,9 +33,7 @@ spec:
           persistentVolumeClaim:
             claimName: task-pv-claim
 
-
 ---
-
 apiVersion: v1
 data:
   index.html: |-
